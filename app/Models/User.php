@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Laratrust\Traits\LaratrustUserTrait;
+
+class User extends Authenticatable
+{
+    use LaratrustUserTrait;
+    use HasFactory, Notifiable;
+
+    use LogsActivity;
+    /**
+     * All fillable attributes will be logged
+     *
+     * @var boolean
+     */
+    static $logFillable = true;
+
+    /**
+     * to log every attribute in your $logAttributes variable,
+     * but only those that has actually changed after the update
+     *
+     * @var boolean
+     */
+    protected static $logOnlyDirty = true;
+
+    /**
+     * prevents the package from storing empty logs
+     *
+     * @var boolean
+     */
+    protected static $submitEmptyLogs = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'active',
+        'avatar',
+        'module',
+        'provider', // social login
+        'provider_id', // social login
+        'provider_response' // social login
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'provider', // social login
+        'provider_id', // social login
+        'provider_response' // social login
+
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+}
