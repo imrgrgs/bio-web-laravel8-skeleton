@@ -12,11 +12,16 @@ BIO-Laravel8 is a web application framework with expressive, elegant syntax. We 
 
 BIO-Laravel8 is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning BIO-Laravel8
+## Install BIO-Laravel8
 
-BIO-Laravel8 has the most extensive and thorough [documentation](https://BIO-Laravel8.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including BIO-Laravel8, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   clone
+-   composer install
+-   cp .env.example to .env
+-   php artisan key:generate
+-   chmod -R 755 storage bootstrap/cache
+-   adjust .env
+-   create database
+-   php artisan migrate
 
 ## BIO-Laravel8 Sponsors
 
