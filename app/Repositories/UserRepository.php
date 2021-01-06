@@ -8,27 +8,42 @@ use App\Repositories\BaseRepository;
 /**
  * Class UserRepository
  * @package App\Repositories
-*/
+ */
 
 class UserRepository extends BaseRepository
 {
-    /**
-     * @var array
-     */
-    protected $fieldSearchable = [
-        'name',
-        'email',
-        'password'
-    ];
-
-    /**
-     * Return searchable fields
-     *
-     * @return array
-     */
-    public function getFieldsSearchable()
+    public function getAllowedFilters()
     {
-        return $this->fieldSearchable;
+        return [
+            'name',
+            'email',
+        ];
+    }
+
+    public function getAllowedIncludes()
+    {
+        return [];
+    }
+
+    public function getAllowedFields()
+    {
+        return [
+            'name',
+            'email',
+            'active',
+            'avatar',
+            'module',
+        ];
+    }
+
+    public function getAllowedSorts()
+    {
+        return [
+            'name',
+            'email',
+            'active',
+            'module',
+        ];
     }
 
     /**

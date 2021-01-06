@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
-use Illuminate\Container\Container as Application;
+use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Container\Container as Application;
 
 abstract class BaseRepository
 {
@@ -34,7 +35,29 @@ abstract class BaseRepository
      *
      * @return array
      */
-    abstract public function getFieldsSearchable();
+    abstract public function getAllowedFilters();
+
+    /**
+     * Get relations includes array
+     *
+     * @return array
+     */
+    abstract public function getAllowedIncludes();
+    /**
+     * Get fields to show array
+     *
+     * @return array
+     */
+    abstract public function getAllowedFields();
+
+    /**
+     * Get fields to sort array
+     *
+     * @return array
+     */
+    abstract public function getAllowedSorts();
+
+
 
     /**
      * Configure the Model
@@ -61,47 +84,20 @@ abstract class BaseRepository
         return $this->model = $model;
     }
 
-    /**
-     * Paginate records for scaffold.
-     *
-     * @param int $perPage
-     * @param array $columns
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function paginate($perPage, $columns = ['*'])
+
+
+
+
+    public function allQuery(Request $request)
     {
-        $query = $this->allQuery();
+        $input = $request->all();
+        // dd($input);
 
-        return $query->paginate($perPage, $columns);
-    }
-
-    /**
-     * Build a query for retrieving all records.
-     *
-     * @param array $search
-     * @param int|null $skip
-     * @param int|null $limit
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function allQuery($search = [], $skip = null, $limit = null)
-    {
-        $query = $this->model->newQuery();
-
-        if (count($search)) {
-            foreach($search as $key => $value) {
-                if (in_array($key, $this->getFieldsSearchable())) {
-                    $query->where($key, $value);
-                }
-            }
-        }
-
-        if (!is_null($skip)) {
-            $query->skip($skip);
-        }
-
-        if (!is_null($limit)) {
-            $query->limit($limit);
-        }
+        $query = QueryBuilder::for($this->model())
+            ->allowedFilters($this->getAllowedFilters()) // start from an existing Builder instance
+            ->allowedFields($this->getAllowedFields())
+            ->allowedIncludes($this->getAllowedIncludes())
+            ->allowedSorts($this->getAllowedSorts());
 
         return $query;
     }
@@ -116,9 +112,9 @@ abstract class BaseRepository
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function all($search = [], $skip = null, $limit = null, $columns = ['*'])
+    public function all(Request $request, $skip = null, $limit = null, $columns = ['*'])
     {
-        $query = $this->allQuery($search, $skip, $limit);
+        $query = $this->allQuery($request);
 
         return $query->get($columns);
     }
@@ -149,9 +145,10 @@ abstract class BaseRepository
      */
     public function find($id, $columns = ['*'])
     {
-        $query = $this->model->newQuery();
+        return QueryBuilder::for($this->model())->find($id, $columns);
+        //  $query = $this->model->newQuery();
 
-        return $query->find($id, $columns);
+        // return $query->find($id, $columns);
     }
 
     /**
@@ -164,9 +161,9 @@ abstract class BaseRepository
      */
     public function update($input, $id)
     {
-        $query = $this->model->newQuery();
+        $query = QueryBuilder::for($this->model());
 
-        $model = $query->findOrFail($id);
+        $model =  $query->findOrFail($id);
 
         $model->fill($input);
 
@@ -184,7 +181,8 @@ abstract class BaseRepository
      */
     public function delete($id)
     {
-        $query = $this->model->newQuery();
+        $query = QueryBuilder::for($this->model());
+
 
         $model = $query->findOrFail($id);
 
