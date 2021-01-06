@@ -18,6 +18,7 @@ BIO-Laravel8 is accessible, powerful, and provides tools required for large, rob
 -   composer install
 -   cp .env.example to .env
 -   php artisan key:generate
+-   php artisan jwt:secret
 -   chmod -R 755 storage bootstrap/cache
 -   adjust .env
 -   create database
