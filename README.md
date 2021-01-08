@@ -1,18 +1,8 @@
-## About BIO-Laravel8
+## About BIO-Connect
 
-BIO-Laravel8 is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. BIO-Laravel8 takes the pain out of development by easing common tasks used in many web projects, such as:
+BIO-Connect is a web application with Laravel8 framework
 
--   [Simple, fast routing engine](https://laravel.com/docs/routing).
--   [Powerful dependency injection container](https://laravel.com/docs/container).
--   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
--   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
--   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
--   [Robust background job processing](https://laravel.com/docs/queues).
--   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-BIO-Laravel8 is accessible, powerful, and provides tools required for large, robust applications.
-
-## Install BIO-Laravel8
+## Install BIO-Connect
 
 -   clone
 -   composer install
@@ -20,13 +10,14 @@ BIO-Laravel8 is accessible, powerful, and provides tools required for large, rob
 -   php artisan key:generate
 -   php artisan jwt:secret
 -   chmod -R 755 storage bootstrap/cache
--   adjust .env
+-   edit and adjust .env
 -   create database
 -   php artisan migrate
+-   to excute http://bio-connect/api
 
-## BIO-Laravel8 Sponsors
+## BIO-Connect Sponsors
 
-We would like to extend our thanks to the following sponsors for funding BIO-Laravel8 development. If you are interested in becoming a sponsor, please visit the BIO-Laravel8 [Patreon page](https://patreon.com/taylorotwell).
+We would like to extend our thanks to the following sponsors for funding BIO-Connect development. If you are interested in becoming a sponsor, please visit the BIO-Connect [Patreon page](https://patreon.com/taylorotwell).
 
 ### Third parts
 
@@ -43,16 +34,16 @@ We would like to extend our thanks to the following sponsors for funding BIO-Lar
 
 ## Contributing
 
-Thank you for considering contributing to the BIO-Laravel8 framework! The contribution guide can be found in the [laravel documentation](https://laravel.com/docs/contributions).
+Thank you for considering contributing to the BIO-Connect framework! The contribution guide can be found in the [laravel documentation](https://laravel.com/docs/contributions).
 
 ## Code of Conduct
 
-In order to ensure that the BIO-Laravel8 community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+In order to ensure that the BIO-Connect community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within BIO-Laravel8, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within BIO-Connect, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
-The BIO-Laravel8 framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The BIO-Connect framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
