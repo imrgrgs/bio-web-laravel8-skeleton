@@ -31,11 +31,13 @@ class LaratrustSeeder extends Seeder
 
 
         // Create a new role
-        $role = \App\Models\Role::firstOrCreate([
-            'name' => 'superadmin',
-            'display_name' => ['en' => 'super admin', 'pt-BR' => 'super administrador'],
-            'description' => ['en' => 'master of the universe', 'pt-BR' => 'mestre do universo']
-        ]);
+        $role = \App\Models\Role::firstOrCreate(
+            ['name' => 'superadmin'],
+            [
+                'display_name' => ['en' => 'super admin', 'pt-BR' => 'super administrador'],
+                'description' => ['en' => 'master of the universe', 'pt-BR' => 'mestre do universo']
+            ]
+        );
         $permissions = [];
 
         $this->command->info('Creating Role ' . strtoupper('superadmin'));
@@ -47,16 +49,20 @@ class LaratrustSeeder extends Seeder
 
 
 
-        $permissions[] = \App\Models\Permission::firstOrCreate([
-            'name' => 'users-create',
-            'display_name' => ['en' => 'create users', 'pt-BR' => 'adicionar usuários'],
-            'description' => ['en' => 'create users', 'pt-BR' => 'adicionar usuários'],
-        ])->id;
-        $permissions[] = \App\Models\Permission::firstOrCreate([
-            'name' => 'users-update',
-            'display_name' => ['en' => 'update users', 'pt-BR' => 'editar usuários'],
-            'description' => ['en' => 'update users', 'pt-BR' => 'editar usuários'],
-        ])->id;
+        $permissions[] = \App\Models\Permission::firstOrCreate(
+            ['name' => 'users-create',],
+            [
+                'display_name' => ['en' => 'create users', 'pt-BR' => 'adicionar usuários'],
+                'description' => ['en' => 'create users', 'pt-BR' => 'adicionar usuários'],
+            ]
+        )->id;
+        $permissions[] = \App\Models\Permission::firstOrCreate(
+            ['name' => 'users-update'],
+            [
+                'display_name' => ['en' => 'update users', 'pt-BR' => 'editar usuários'],
+                'description' => ['en' => 'update users', 'pt-BR' => 'editar usuários'],
+            ]
+        )->id;
 
 
 
