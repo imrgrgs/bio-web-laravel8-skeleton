@@ -23,6 +23,53 @@ Route::get('/', function () {
     ], 200);
 });
 
+$auth = [
+    'prefix' => '',
+    'domain' => '',
+    'middleware' => 'api',
+    'as' => 'auth.',
+    'namespace' => 'Auth',
+];
+Route::group($auth, function () {
+
+    Route::post(
+        'login',
+        [
+            'as' => 'login',
+            'uses' => 'AuthController@login',
+        ]
+    );
+
+    Route::post(
+        'logout',
+        [
+            'as' => 'logout',
+            'uses' => 'AuthController@logout',
+        ]
+    );
+
+    Route::post(
+        'refresh',
+        [
+            'as' => 'refresh',
+            'uses' => 'AuthController@refresh',
+        ]
+    );
+
+    Route::post(
+        'me',
+        [
+            'as' => 'me',
+            'uses' => 'AuthController@me',
+        ]
+    );
+}); // end group auth
+
+
+
+
+
+
 /**
  * Laravel Socialite routes social midia login
  */
@@ -40,5 +87,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::resource('servers', ServerAPIController::class);
+$default = [
+    'prefix' => '',
+    'domain' => '',
+    'middleware' => 'auth:api',
+    'as' => '',
+];
+Route::group($default, function () {
+    Route::resource('servers', ServerAPIController::class);
+});

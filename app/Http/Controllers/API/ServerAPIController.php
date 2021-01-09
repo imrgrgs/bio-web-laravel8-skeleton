@@ -11,6 +11,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\ServerResourceCollection;
 use App\Http\Requests\API\CreateServerAPIRequest;
 use App\Http\Requests\API\UpdateServerAPIRequest;
+use App\Services\CreateServerService;
 
 /**
  * Class ServerController
@@ -61,6 +62,7 @@ class ServerAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+
         $servers = $this->serverRepository->all(
             $request,
             $request->get('skip'),
@@ -111,11 +113,11 @@ class ServerAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateServerAPIRequest $request)
+    public function store(CreateServerAPIRequest $request, CreateServerService $createServer)
     {
         $input = $request->all();
 
-        $server = $this->serverRepository->create($input);
+        $server = $createServer->make($input);
 
         return $this->sendResponse(
             new ServerResource($server),

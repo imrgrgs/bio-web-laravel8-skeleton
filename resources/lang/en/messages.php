@@ -7,5 +7,7 @@ return [
     'updated'   => ':model updated successfully.',
     'deleted'   => ':model deleted successfully.',
     'not_found' => ':model not found',
+    'unauthorized' => ':model unauthorized',
+    'successfully_logged_out' => ':model Successfully logged out',
 
 ];
