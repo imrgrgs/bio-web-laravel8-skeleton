@@ -96,3 +96,14 @@ $default = [
 Route::group($default, function () {
     Route::resource('servers', ServerAPIController::class);
 });
+
+
+
+Route::fallback(function () {
+    return response()->json([
+        'status' => 404,
+        'success' => false,
+        'message' => 'Page Not Found. If error persists, contact ti@bitio.com.br',
+        'data' => null
+    ], 404);
+});
