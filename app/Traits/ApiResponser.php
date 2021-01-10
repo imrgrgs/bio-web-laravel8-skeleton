@@ -35,8 +35,11 @@ trait ApiResponser
         ], $code);
     }
 
-    protected function sendError($message = null, $code = JsonResponse::HTTP_NOT_FOUND)
+    protected function sendError($message = null, $code = JsonResponse::HTTP_NOT_FOUND, $data = [])
     {
+        if ($code == JsonResponse::HTTP_UNPROCESSABLE_ENTITY) {
+            return $this->sendErrorUnprocessable($data, $message);
+        }
         return response()->json([
             'status' => $code,
             'success' => false,

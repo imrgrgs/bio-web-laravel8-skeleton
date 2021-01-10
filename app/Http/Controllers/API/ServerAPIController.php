@@ -165,6 +165,8 @@ class ServerAPIController extends AppBaseController
      */
     public function show($id)
     {
+
+
         /** @var Server $server */
         $server = $this->serverRepository->find($id);
 

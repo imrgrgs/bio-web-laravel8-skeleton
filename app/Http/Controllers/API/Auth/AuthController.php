@@ -7,6 +7,7 @@ use Throwable;
 use App\Http\Resources\UserResource;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\API\LoginUserAPIRequest;
 
 class AuthController extends AppBaseController
 {
@@ -25,7 +26,7 @@ class AuthController extends AppBaseController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(LoginUserAPIRequest $request)
     {
         $credentials = request(['email', 'password']);
 
@@ -33,7 +34,6 @@ class AuthController extends AppBaseController
             return $this->sendError(
                 __('messages.unauthorized', ['model' => __('models/users.singular')])
             );
-            // return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         return $this->respondWithToken($token);
@@ -52,7 +52,6 @@ class AuthController extends AppBaseController
                 return $this->sendError(
                     __('messages.unauthorized', ['model' => __('models/users.singular')])
                 );
-                // return response()->json(['error' => 'Unauthorized'], 401);
             }
         } catch (Throwable $exception) {
             dd($exception);
@@ -65,7 +64,6 @@ class AuthController extends AppBaseController
             new UserResource($user),
             __('messages.retrieved', ['model' => __('models/users.singular')])
         );
-        // return response()->json(auth()->user());
     }
 
     /**

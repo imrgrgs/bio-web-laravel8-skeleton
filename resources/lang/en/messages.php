@@ -9,5 +9,6 @@ return [
     'not_found' => ':model not found',
     'unauthorized' => ':model unauthorized',
     'successfully_logged_out' => ':model Successfully logged out',
+    'http_internal_server_error' => 'http internal server error',
 
 ];

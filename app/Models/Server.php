@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -50,7 +51,7 @@ class Server extends Model
     use SoftDeletes;
 
     use HasFactory;
-
+    use LogsActivity;
     public $table = 'servers';
 
 
